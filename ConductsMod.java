@@ -18,6 +18,7 @@ public class ConductsMod {
     public void preInit(FMLPreInitializationEvent event)
     {
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new ConductEventListener());
         
         AchievementPage.registerAchievementPage(new ConductsPage());
 

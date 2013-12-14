@@ -14,7 +14,7 @@ public class ConductsPage extends AchievementPage {
 	public static Achievement vegetarian = new Achievement(6000003, "vegetarian", 1, 2, Item.cake, vegan).registerAchievement();
 	
 	
-	public static Achievement pacifist = new Achievement(6000004, "pacifist", 4, 0, Block.plantRed, (Achievement)null).setIndependent().setSpecial().registerAchievement();
+	public static Achievement pacifist = new Achievement(6000004, "pacifist", 4, -1, Block.plantRed, (Achievement)null).setIndependent().setSpecial().registerAchievement();
 	public static Achievement neverSword = new Achievement(6000005, "neverSword", 3, 0, Item.swordIron, pacifist).registerAchievement();
 	public static Achievement neverRange = new Achievement(6000006, "neverRange", 5, 0, Item.arrow, pacifist).registerAchievement();
 
@@ -22,7 +22,7 @@ public class ConductsPage extends AchievementPage {
 	
 
 	public ConductsPage() {
-		super(ConductsMod.NAME, breatharian, carnivore, vegan, vegetarian);
+		super(ConductsMod.NAME, breatharian, carnivore, vegan, vegetarian, pacifist, neverSword, neverRange);
 		
         LanguageRegistry.instance().addStringLocalization("achievement.breatharian", "en_US", "Breatharian");
         LanguageRegistry.instance().addStringLocalization("achievement.breatharian.desc", "en_US", "Never eat.");
@@ -35,6 +35,15 @@ public class ConductsPage extends AchievementPage {
 
         LanguageRegistry.instance().addStringLocalization("achievement.vegetarian", "en_US", "Vegetarian");
         LanguageRegistry.instance().addStringLocalization("achievement.vegetarian.desc", "en_US", "Never eat a meat!");
+
+        LanguageRegistry.instance().addStringLocalization("achievement.pacifist", "en_US", "Pacifist");
+        LanguageRegistry.instance().addStringLocalization("achievement.pacifist.desc", "en_US", "First, do no harm");
+
+        LanguageRegistry.instance().addStringLocalization("achievement.neverSword", "en_US", "Way of the Fistbow");
+        LanguageRegistry.instance().addStringLocalization("achievement.neverSword.desc", "en_US", "Never strike with a wielded weapon");
+
+        LanguageRegistry.instance().addStringLocalization("achievement.neverRange", "en_US", "Way of the Sword");
+        LanguageRegistry.instance().addStringLocalization("achievement.neverRange.desc", "en_US", "Never strike at range");
 
 	}
 

@@ -11,7 +11,7 @@ public class ConductsPage extends AchievementPage {
 	public static Achievement breatharian = new Achievement(6000000, "breatharian", 0, -2, Block.glass, (Achievement)null).setSpecial().registerAchievement();
 	public static Achievement carnivore = new Achievement(6000001, "carnivore", -1, 0, Item.beefRaw, breatharian).registerAchievement();
 	public static Achievement vegan = new Achievement(6000002, "vegan", 1, 0, Item.carrot, breatharian).registerAchievement();
-	public static Achievement vegetarian = new Achievement(6000003, "vegetarian", 1, 2, Item.cake, vegan).registerAchievement();
+	public static Achievement vegetarian = new Achievement(6000003, "vegetarian", 1, 2, Item.pumpkinPie, vegan).registerAchievement();
 	
 	public static Achievement pacifist = new Achievement(6000004, "pacifist", 4, -2, Block.plantRed, (Achievement)null).setSpecial().registerAchievement();
 	public static Achievement neverSword = new Achievement(6000005, "neverSword", 3, 0, Item.arrow, pacifist).registerAchievement();

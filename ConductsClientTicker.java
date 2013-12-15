@@ -4,10 +4,13 @@ import java.util.EnumSet;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.achievement.GuiAchievement;
+import net.minecraft.client.gui.achievement.GuiAchievements;
 import net.minecraft.stats.Achievement;
+import net.minecraftforge.common.AchievementPage;
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import cpw.mods.fml.common.TickType;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ConductsClientTicker implements ITickHandler {
 
@@ -23,9 +26,9 @@ public class ConductsClientTicker implements ITickHandler {
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData) {
 		Minecraft mc = Minecraft.getMinecraft();
-		
+
+		// check for the achievement box
 		long currentCheevTime = ObfuscationReflectionHelper.getPrivateValue(GuiAchievement.class, mc.guiAchievement, "achievementTime");
-		
 		// the achievement time is non-zero whenever the box is on screen
 		if (currentCheevTime > 0) {
 			Achievement currentAchievement = ObfuscationReflectionHelper.getPrivateValue(GuiAchievement.class, mc.guiAchievement, "theAchievement");
@@ -35,7 +38,21 @@ public class ConductsClientTicker implements ITickHandler {
 			}
 		}
 		
-		
+		// check for the achievements GUI
+		if (mc.currentScreen instanceof GuiAchievements) {
+			int currentPage = ObfuscationReflectionHelper.getPrivateValue(GuiAchievements.class, (GuiAchievements)mc.currentScreen, "currentPage");
+			
+			if (currentPage >= 0 && AchievementPage.getAchievementPage(currentPage) instanceof ConductsPage) {
+				
+				System.out.println("player on our achievements page");
+
+				
+				// replace taken text in i18n database with "Conduct Broken"
+				LanguageRegistry.instance().addStringLocalization("achievement.taken", "Conduct Broken");
+				
+				System.out.println("replacing taken");
+			}
+		}
 	}
 
 	@Override

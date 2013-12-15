@@ -1,6 +1,8 @@
 package conducts;
 
+import conducts.client.GuiGameOverConducts;
 import cpw.mods.fml.common.ICraftingHandler;
+import net.minecraft.client.gui.GuiGameOver;
 import net.minecraft.client.gui.achievement.GuiAchievement;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -225,6 +227,16 @@ public class ConductEventListener implements ICraftingHandler {
 	public void onSmelting(EntityPlayer player, ItemStack item) {
 		// not used
 		
+	}
+	
+	/**
+	 * Look for the "You Died!" screen so that we can put the achievements button on there.
+	 */
+	@ForgeSubscribe
+	public void guiScreenListener(GuiOpenEvent event) {
+		if (event.gui instanceof GuiGameOver && !(event.gui instanceof GuiGameOverConducts)) {
+			event.gui = new GuiGameOverConducts();
+		}
 	}
 
 }

@@ -22,10 +22,6 @@ public class ConductsClientTicker implements ITickHandler {
 	 */
 	@Override
 	public void tickStart(EnumSet<TickType> type, Object... tickData) {
-	}
-
-	@Override
-	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
 		Minecraft mc = Minecraft.getMinecraft();
 		
 		long currentCheevTime = ObfuscationReflectionHelper.getPrivateValue(GuiAchievement.class, mc.guiAchievement, "achievementTime");
@@ -38,6 +34,12 @@ public class ConductsClientTicker implements ITickHandler {
 				ObfuscationReflectionHelper.setPrivateValue(GuiAchievement.class, mc.guiAchievement, "Conduct Broken", "achievementGetLocalText", "a");
 			}
 		}
+		
+		
+	}
+
+	@Override
+	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
 	}
 	
     /**

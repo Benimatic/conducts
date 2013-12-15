@@ -1,6 +1,7 @@
 package conducts;
 
 import cpw.mods.fml.common.ICraftingHandler;
+import net.minecraft.client.gui.achievement.GuiAchievement;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +16,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -240,8 +242,8 @@ public class ConductEventListener implements ICraftingHandler {
 
 	@Override
 	public void onSmelting(EntityPlayer player, ItemStack item) {
-		// TODO Auto-generated method stub
+		// not used
 		
 	}
-	
+
 }

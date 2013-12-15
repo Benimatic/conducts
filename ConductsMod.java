@@ -28,6 +28,8 @@ public class ConductsMod {
         MinecraftForge.EVENT_BUS.register(conductChecker);
         
         GameRegistry.registerCraftingHandler(conductChecker);
+        
+        
 
     }
 	

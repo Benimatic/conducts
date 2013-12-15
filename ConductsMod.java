@@ -6,6 +6,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid=ConductsMod.ID, name=ConductsMod.NAME, version=ConductsMod.VERSION)
 public class ConductsMod {
@@ -17,10 +18,16 @@ public class ConductsMod {
 	@EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new ConductEventListener());
-        
         AchievementPage.registerAchievementPage(new ConductsPage());
+
+		
+		MinecraftForge.EVENT_BUS.register(this);
+        
+        ConductEventListener conductChecker = new ConductEventListener();
+        
+        MinecraftForge.EVENT_BUS.register(conductChecker);
+        
+        GameRegistry.registerCraftingHandler(conductChecker);
 
     }
 	

@@ -1,36 +1,44 @@
 package conducts;
 
+import cpw.mods.fml.common.ICraftingHandler;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-public class ConductEventListener {
+public class ConductEventListener implements ICraftingHandler {
 
-	
-	@ForgeSubscribe
-	public void itemDestroyed(PlayerDestroyItemEvent event)
-	{
-		System.out.println("Player destroyed an item : " + event.original.getDisplayName());
-	}
-	
+
+	/**
+	 * Forge event that fires when the player uses an item.  Currently we are using this to detect food eating.
+	 * 
+	 * TODO: detect food actually being consumed instead of just clicked
+	 * 
+	 * @param event
+	 */
 	@ForgeSubscribe
 	public void interact(PlayerInteractEvent event)
 	{
-//		System.out.println("Player interacting!");
 		if (event.action == PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
 			if (event.entityPlayer.getCurrentEquippedItem() != null && event.entityPlayer.getCurrentEquippedItem().getItemUseAction() == EnumAction.eat) {
-//				System.out.println("Player interacting with a FOOD ! " + event.entityPlayer.getCurrentEquippedItem() + " player is " + event.entityPlayer);
 				
 				event.entityPlayer.triggerAchievement(ConductsPage.breatharian);
 				
@@ -44,10 +52,102 @@ public class ConductEventListener {
 						event.entityPlayer.triggerAchievement(ConductsPage.carnivore);
 					}
 				}
+				
+				if (isItemUsedInRecipeFor(new ItemStack(Item.egg), new ItemStack(currentFood))) {
+					event.entityPlayer.triggerAchievement(ConductsPage.vegan);
+				}
+			}
+			
+			if (isItemUsedInRecipeFor(new ItemStack(Item.book), event.entityPlayer.getCurrentEquippedItem()) || isItemUsedInRecipeFor(new ItemStack(Item.paper), event.entityPlayer.getCurrentEquippedItem())) {
+				event.entityPlayer.triggerAchievement(ConductsPage.illiterate);
 			}
 		}
 	}
 	
+	/**
+	 * Helper method used to find forbidden items.  Checks the recipe used to make an item for the taboo item.
+	 * 
+	 * @param checkFor
+	 * @param checking
+	 * @return
+	 */
+	public boolean isItemUsedInRecipeFor(ItemStack checkFor, ItemStack checking)
+	{
+		System.out.println("I am looking for a recipe for " + checking);
+
+		
+		for (Object maybeARecipe : CraftingManager.getInstance().getRecipeList()) {
+			if (maybeARecipe instanceof IRecipe) {
+				IRecipe iRecipe = (IRecipe)maybeARecipe;
+				
+				if (iRecipe.getRecipeOutput() != null && iRecipe.getRecipeOutput().isItemEqual(checking))
+				{
+					System.out.println("I found a recipe for your current item. It is " + iRecipe);
+
+					
+					// shaped recipe checker
+					if (maybeARecipe instanceof ShapedRecipes)
+					{
+						ShapedRecipes recipe = (ShapedRecipes)maybeARecipe;
+						
+						for (ItemStack input : recipe.recipeItems) {
+							if (input != null && input.isItemEqual(checkFor))
+							{
+								return true;
+							}
+						}
+					}
+					
+					// shapeless checker
+					if (maybeARecipe instanceof ShapelessRecipes)
+					{
+						ShapelessRecipes recipe = (ShapelessRecipes)maybeARecipe;
+						
+						for (Object input : recipe.recipeItems) {
+							
+							System.out.println("Matching recipe contains " + ((ItemStack)input).getDisplayName());
+
+							
+							if (((ItemStack)input).isItemEqual(checkFor))
+							{
+								return true;
+							}
+						}
+					}
+
+					// shapeless ore checker
+					if (maybeARecipe instanceof ShapelessOreRecipe)
+					{
+						ShapelessOreRecipe recipe = (ShapelessOreRecipe)maybeARecipe;
+						
+						for (Object input : recipe.getInput()) {
+							
+							System.out.println("Matching recipe contains " + input);
+
+							
+							if (input instanceof ItemStack && ((ItemStack)input).isItemEqual(checkFor))
+							{
+								return true;
+							}
+							if (input instanceof Item && checkFor.itemID == ((Item)input).itemID)
+							{
+								return true;
+							}
+						}
+					}
+
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Forge event that fires when an entity gets hurt.  Used for the pacifist tree conducts
+	 * 
+	 * @param event
+	 */
 	@ForgeSubscribe
 	public void entityHurts(LivingHurtEvent event)
 	{
@@ -76,7 +176,11 @@ public class ConductEventListener {
 		}
 	}
 	
-	
+	/**
+	 *  Forge event that fires when an entity dies.  Used for the no-kill conducts
+	 * 
+	 * @param event
+	 */
 	@ForgeSubscribe
 	public void entityDies(LivingDeathEvent event)
 	{
@@ -99,4 +203,45 @@ public class ConductEventListener {
 			}
 		}
 	}
+	
+	/**
+	 * Forge event that fires when the player is about to break a block.  Used for the block breaking conducts.
+	 * 
+	 * @param event
+	 */
+	@ForgeSubscribe
+	public void blockBroken(BreakEvent event) {
+		if (event.block != null) {
+			event.getPlayer().triggerAchievement(ConductsPage.noHarvest);
+		}
+		
+		if (OreDictionary.getOreID(new ItemStack(event.block, 1, event.blockMetadata)) == OreDictionary.getOreID("logWood")) {
+			event.getPlayer().triggerAchievement(ConductsPage.noHarvest);
+			event.getPlayer().triggerAchievement(ConductsPage.noTree);
+		}
+		
+		if (OreDictionary.getOreID(new ItemStack(event.block, 1, event.blockMetadata)) == OreDictionary.getOreID("stone")) {
+			event.getPlayer().triggerAchievement(ConductsPage.noHarvest);
+			event.getPlayer().triggerAchievement(ConductsPage.noStone);
+		}
+		
+		
+	}
+
+	/**
+	 * Handler that triggers when the player crafts an item.  We currently check for taboo items for the illiterate conduct
+	 */
+	@Override
+	public void onCrafting(EntityPlayer player, ItemStack item, IInventory craftMatrix) {
+		if (isItemUsedInRecipeFor(new ItemStack(Item.book), item) || isItemUsedInRecipeFor(new ItemStack(Item.paper), item)) {
+			player.triggerAchievement(ConductsPage.illiterate);
+		}
+	}
+
+	@Override
+	public void onSmelting(EntityPlayer player, ItemStack item) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

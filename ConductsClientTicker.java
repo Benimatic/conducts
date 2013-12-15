@@ -28,14 +28,14 @@ public class ConductsClientTicker implements ITickHandler {
 	public void tickEnd(EnumSet<TickType> type, Object... tickData) {
 		Minecraft mc = Minecraft.getMinecraft();
 		
-		long currentCheevTime = ObfuscationReflectionHelper.getPrivateValue(GuiAchievement.class, mc.guiAchievement, 7);
+		long currentCheevTime = ObfuscationReflectionHelper.getPrivateValue(GuiAchievement.class, mc.guiAchievement, "achievementTime");
 		
 		// the achievement time is non-zero whenever the box is on screen
 		if (currentCheevTime > 0) {
-			Achievement currentAchievement = ObfuscationReflectionHelper.getPrivateValue(GuiAchievement.class, mc.guiAchievement, 6);
+			Achievement currentAchievement = ObfuscationReflectionHelper.getPrivateValue(GuiAchievement.class, mc.guiAchievement, "theAchievement");
 
 			if (mod.getAchievementPage().getAchievements().contains(currentAchievement)) {
-				ObfuscationReflectionHelper.setPrivateValue(GuiAchievement.class, mc.guiAchievement, "Conduct Broken", 4);
+				ObfuscationReflectionHelper.setPrivateValue(GuiAchievement.class, mc.guiAchievement, "Conduct Broken", "achievementGetLocalText", "a");
 			}
 		}
 	}

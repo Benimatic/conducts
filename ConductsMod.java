@@ -7,6 +7,8 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid=ConductsMod.ID, name=ConductsMod.NAME, version=ConductsMod.VERSION)
 public class ConductsMod {
@@ -14,24 +16,37 @@ public class ConductsMod {
 	public static final String VERSION = "0.01";
 	public static final String ID = "conducts";
 	public static final String NAME = "Conducts for Minecraft";
+	
+	 ConductEventListener conductChecker;
+	private ConductsPage page;
 
 	@EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        AchievementPage.registerAchievementPage(new ConductsPage());
+        page = new ConductsPage();
+		AchievementPage.registerAchievementPage(page);
 
 		
 		MinecraftForge.EVENT_BUS.register(this);
         
-        ConductEventListener conductChecker = new ConductEventListener();
+		this.conductChecker = new ConductEventListener();
         
         MinecraftForge.EVENT_BUS.register(conductChecker);
         
         GameRegistry.registerCraftingHandler(conductChecker);
         
         
+        TickRegistry.registerTickHandler(new ConductsClientTicker(this), Side.CLIENT);
 
     }
+
+	public ConductEventListener getConductChecker() {
+		return conductChecker;
+	}
+
+	public ConductsPage getAchievementPage() {
+		return page;
+	}
 	
 	
 }

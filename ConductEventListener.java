@@ -40,26 +40,7 @@ public class ConductEventListener implements ICraftingHandler {
 	public void interact(PlayerInteractEvent event)
 	{
 		if (event.action == PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
-			if (event.entityPlayer.getCurrentEquippedItem() != null && event.entityPlayer.getCurrentEquippedItem().getItemUseAction() == EnumAction.eat) {
-				
-				event.entityPlayer.triggerAchievement(ConductsPage.breatharian);
-				
-				ItemFood currentFood = event.entityPlayer.getCurrentEquippedItem().getItem() instanceof ItemFood ? (ItemFood)(event.entityPlayer.getCurrentEquippedItem().getItem()) : null;
-				
-				if (currentFood != null) {
-					if (currentFood.isWolfsFavoriteMeat()) {
-						event.entityPlayer.triggerAchievement(ConductsPage.vegan);
-						event.entityPlayer.triggerAchievement(ConductsPage.vegetarian);
-					} else {
-						event.entityPlayer.triggerAchievement(ConductsPage.carnivore);
-					}
-				}
-				
-				if (isItemUsedInRecipeFor(new ItemStack(Item.egg), new ItemStack(currentFood))) {
-					event.entityPlayer.triggerAchievement(ConductsPage.vegan);
-				}
-			}
-			
+
 			if (isItemUsedInRecipeFor(new ItemStack(Item.book), event.entityPlayer.getCurrentEquippedItem()) || isItemUsedInRecipeFor(new ItemStack(Item.paper), event.entityPlayer.getCurrentEquippedItem())) {
 				event.entityPlayer.triggerAchievement(ConductsPage.illiterate);
 			}
@@ -73,7 +54,7 @@ public class ConductEventListener implements ICraftingHandler {
 	 * @param checking
 	 * @return
 	 */
-	public boolean isItemUsedInRecipeFor(ItemStack checkFor, ItemStack checking)
+	public static boolean isItemUsedInRecipeFor(ItemStack checkFor, ItemStack checking)
 	{
 		System.out.println("I am looking for a recipe for " + checking);
 

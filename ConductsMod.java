@@ -37,6 +37,7 @@ public class ConductsMod {
         
         
         TickRegistry.registerTickHandler(new ConductsClientTicker(this), Side.CLIENT);
+        TickRegistry.registerTickHandler(new ConductsServerTicker(), Side.SERVER);
 
     }
 

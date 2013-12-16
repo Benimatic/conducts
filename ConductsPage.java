@@ -58,6 +58,9 @@ public class ConductsPage extends AchievementPage {
         LanguageRegistry.instance().addStringLocalization("achievement.noKillPassive", "en_US", "Save the Animals!");
         LanguageRegistry.instance().addStringLocalization("achievement.noKillPassive.desc", "en_US", "Never kill an animal");
 
+        LanguageRegistry.instance().addStringLocalization("achievement.noKillPlayers", "en_US", "Save the Players!");
+        LanguageRegistry.instance().addStringLocalization("achievement.noKillPlayers.desc", "en_US", "Never kill another player");
+
         LanguageRegistry.instance().addStringLocalization("achievement.noHarvest", "en_US", "Non-harvester");
         LanguageRegistry.instance().addStringLocalization("achievement.noHarvest.desc", "en_US", "Never directly break a block");
 
@@ -65,7 +68,7 @@ public class ConductsPage extends AchievementPage {
         LanguageRegistry.instance().addStringLocalization("achievement.noTree.desc", "en_US", "Do not harvest a wood block");
 
         LanguageRegistry.instance().addStringLocalization("achievement.noStone", "en_US", "Caver Exemplar");
-        LanguageRegistry.instance().addStringLocalization("achievement.noStone.desc", "en_US", "Do not break plain stone blocks");
+        LanguageRegistry.instance().addStringLocalization("achievement.noStone.desc", "en_US", "Do not break a plain stone block");
 
         LanguageRegistry.instance().addStringLocalization("achievement.illiterate", "en_US", "Illiterate");
         LanguageRegistry.instance().addStringLocalization("achievement.illiterate.desc", "en_US", "Never read a book or use one in a recipe");

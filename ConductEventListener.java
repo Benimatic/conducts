@@ -73,7 +73,7 @@ public class ConductEventListener implements ICraftingHandler {
 			if (maybeARecipe instanceof IRecipe) {
 				IRecipe iRecipe = (IRecipe)maybeARecipe;
 				
-				if (iRecipe.getRecipeOutput() != null && iRecipe.getRecipeOutput().isItemEqual(checking))
+				if (checking != null && iRecipe.getRecipeOutput() != null && iRecipe.getRecipeOutput().isItemEqual(checking))
 				{
 					//System.out.println("I found a recipe for your current item. It is " + iRecipe);
 

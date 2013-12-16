@@ -46,13 +46,12 @@ public class ConductsClientTicker implements ITickHandler {
 			
 			if (currentPage >= 0 && AchievementPage.getAchievementPage(currentPage) instanceof ConductsPage) {
 				
-				System.out.println("player on our achievements page");
+				//System.out.println("player on our achievements page");
 
 				
 				// replace taken text in i18n database with "Conduct Broken"
-				LanguageRegistry.instance().addStringLocalization("achievement.taken", "Conduct Broken");
 				
-				System.out.println("replacing taken");
+				//System.out.println("replacing taken");
 			}
 		}
 	}

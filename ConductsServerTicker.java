@@ -27,7 +27,7 @@ public class ConductsServerTicker implements ITickHandler {
 		{
 			// the player is about to finish using an item
 			
-			System.out.println("The player is about to finish an item." + player.getItemInUse() + " count = " + player.getItemInUseCount());
+			//System.out.println("The player is about to finish an item." + player.getItemInUse() + " count = " + player.getItemInUseCount());
 			
 			
 			if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItemUseAction() == EnumAction.eat) {
@@ -37,7 +37,7 @@ public class ConductsServerTicker implements ITickHandler {
 				ItemFood currentFood = player.getCurrentEquippedItem().getItem() instanceof ItemFood ? (ItemFood)(player.getCurrentEquippedItem().getItem()) : null;
 				
 				if (currentFood != null) {
-					if (currentFood.isWolfsFavoriteMeat()) {
+					if (currentFood.isWolfsFavoriteMeat() || currentFood.getUnlocalizedName().contains("fish")) {
 						player.triggerAchievement(ConductsPage.vegan);
 						player.triggerAchievement(ConductsPage.vegetarian);
 					} else {

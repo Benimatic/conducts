@@ -14,7 +14,7 @@ import cpw.mods.fml.relauncher.Side;
 @Mod(modid=ConductsMod.ID, name=ConductsMod.NAME, version=ConductsMod.VERSION)
 public class ConductsMod {
 	
-	public static final String VERSION = "0.01";
+	public static final String VERSION = "1.0";
 	public static final String ID = "conducts";
 	public static final String NAME = "Conducts for Minecraft";
 	

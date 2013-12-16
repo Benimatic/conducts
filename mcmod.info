@@ -1,0 +1,21 @@
+[
+{
+  "modid": "Conducts",
+  "name": "Conducts for Minecraft",
+  "description": "Nethack-style conducts for Minecraft.",
+  "mcversion": "1.6.4",
+  "version" : "1.0",
+  "url": "",
+  "updateUrl": "",
+  "authors": [
+    "Benimatic (Ben Mazur)"
+  ],
+  "credits": "By Benimatic",
+  "logoFile": "",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+  ]
+}
+]

@@ -1,7 +1,9 @@
-package conducts;	
+package conducts.client;	
 
 import java.util.EnumSet;
 
+import conducts.ConductsMod;
+import conducts.ConductsPage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.achievement.GuiAchievement;
 import net.minecraft.client.gui.achievement.GuiAchievements;

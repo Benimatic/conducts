@@ -1,5 +1,6 @@
 package conducts;
 
+import conducts.client.ConductsClientTicker;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;

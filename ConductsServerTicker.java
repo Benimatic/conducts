@@ -45,7 +45,8 @@ public class ConductsServerTicker implements ITickHandler {
 					}
 				}
 				
-				if (ConductEventListener.isItemUsedInRecipeFor(new ItemStack(Item.egg), new ItemStack(currentFood))) {
+				if (ConductEventListener.isItemUsedInRecipeFor(new ItemStack(Item.egg), new ItemStack(currentFood)) 
+						|| ConductEventListener.isItemUsedInRecipeFor(new ItemStack(Item.bucketMilk), new ItemStack(currentFood))) {
 					player.triggerAchievement(ConductsPage.vegan);
 				}
 			}

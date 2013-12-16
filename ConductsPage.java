@@ -8,23 +8,23 @@ import net.minecraftforge.common.AchievementPage;
 
 public class ConductsPage extends AchievementPage {
 	
-	public static Achievement breatharian = new Achievement(6000000, "breatharian", 0, -2, Block.glass, (Achievement)null).setSpecial().registerAchievement();
-	public static Achievement carnivore = new Achievement(6000001, "carnivore", -1, 0, Item.beefRaw, breatharian).registerAchievement();
-	public static Achievement vegan = new Achievement(6000002, "vegan", 1, 0, Item.carrot, breatharian).registerAchievement();
-	public static Achievement vegetarian = new Achievement(6000003, "vegetarian", 1, 2, Item.pumpkinPie, vegan).registerAchievement();
+	public static Achievement breatharian = new Achievement(6000000, "breatharian", 1, 2, Block.glass, (Achievement)null).setSpecial().registerAchievement();
+	public static Achievement carnivore = new Achievement(6000001, "carnivore", 2, 0, Item.beefRaw, breatharian).registerAchievement();
+	public static Achievement vegan = new Achievement(6000002, "vegan", 3, 2, Item.carrot, breatharian).registerAchievement();
+	public static Achievement vegetarian = new Achievement(6000003, "vegetarian", 5, 1, Item.pumpkinPie, vegan).registerAchievement();
 	
-	public static Achievement pacifist = new Achievement(6000004, "pacifist", 4, -2, Block.plantRed, (Achievement)null).setSpecial().registerAchievement();
-	public static Achievement neverSword = new Achievement(6000005, "neverSword", 3, 0, Item.arrow, pacifist).registerAchievement();
-	public static Achievement neverRange = new Achievement(6000006, "neverRange", 5, 0, Item.swordGold, pacifist).registerAchievement();
-	public static Achievement noKillMob = new Achievement(6000007, "noKillMob", 3, -3, Item.skull, pacifist).registerAchievement();
-	public static Achievement noKillAnimal = new Achievement(6000008, "noKillPassive", 4, -4, Item.leather, pacifist).registerAchievement();
-	public static Achievement noKillPlayers = new Achievement(6000009, "noKillPlayers", 5, -3, Item.plateGold, pacifist).registerAchievement();
+	public static Achievement pacifist = new Achievement(6000004, "pacifist", -3, 1, Block.plantRed, (Achievement)null).setSpecial().registerAchievement();
+	public static Achievement neverSword = new Achievement(6000005, "neverSword", -2, 4, Item.arrow, pacifist).registerAchievement();
+	public static Achievement neverRange = new Achievement(6000006, "neverRange", -4, 3, Item.swordGold, pacifist).registerAchievement();
+	public static Achievement noKillMob = new Achievement(6000007, "noKillMob", -5, 1, Item.skull, pacifist).registerAchievement();
+	public static Achievement noKillAnimal = new Achievement(6000008, "noKillPassive", -4, -1, Item.leather, pacifist).registerAchievement();
+	public static Achievement noKillPlayers = new Achievement(6000009, "noKillPlayers", -1, 1, Item.plateGold, pacifist).registerAchievement();
 
-	public static Achievement noHarvest = new Achievement(6000010, "noHarvest", -4, -2, Block.grass, (Achievement)null).setSpecial().registerAchievement();
-	public static Achievement noTree = new Achievement(6000011, "noTree", -5, 0, Block.wood, noHarvest).registerAchievement();
-	public static Achievement noStone = new Achievement(6000012, "noStone", -3, 0, Block.stone, noHarvest).registerAchievement();
+	public static Achievement noHarvest = new Achievement(6000010, "noHarvest", 1, -2, Block.grass, (Achievement)null).setSpecial().registerAchievement();
+	public static Achievement noTree = new Achievement(6000011, "noTree", 1, -4, Block.wood, noHarvest).registerAchievement();
+	public static Achievement noStone = new Achievement(6000012, "noStone", 3, -2, Block.stone, noHarvest).registerAchievement();
 
-	public static Achievement illiterate = new Achievement(6000013, "illiterate", -4, -4, Item.book, (Achievement)null).setSpecial().registerAchievement();
+	public static Achievement illiterate = new Achievement(6000013, "illiterate", -1, -1, Item.book, (Achievement)null).setSpecial().registerAchievement();
 
 
 	public ConductsPage() {

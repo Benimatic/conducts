@@ -2,6 +2,7 @@ package conducts;
 
 import conducts.client.GuiGameOverConducts;
 import cpw.mods.fml.common.ICraftingHandler;
+import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiGameOver;
 import net.minecraft.client.gui.achievement.GuiAchievement;
 import net.minecraft.entity.monster.IMob;
@@ -47,6 +48,13 @@ public class ConductEventListener implements ICraftingHandler {
 				event.entityPlayer.triggerAchievement(ConductsPage.illiterate);
 			}
 		}
+		
+		if (event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK && event.entity.worldObj.getBlockId(event.x, event.y, event.z) == Block.cake.blockID) {
+			// hardcoded cake detector
+			event.entityPlayer.triggerAchievement(ConductsPage.breatharian);
+			event.entityPlayer.triggerAchievement(ConductsPage.vegan);
+			event.entityPlayer.triggerAchievement(ConductsPage.carnivore);
+		}
 	}
 	
 	/**
@@ -58,7 +66,7 @@ public class ConductEventListener implements ICraftingHandler {
 	 */
 	public static boolean isItemUsedInRecipeFor(ItemStack checkFor, ItemStack checking)
 	{
-		System.out.println("I am looking for a recipe for " + checking);
+		//System.out.println("I am looking for a recipe for " + checking);
 
 		
 		for (Object maybeARecipe : CraftingManager.getInstance().getRecipeList()) {
@@ -67,7 +75,7 @@ public class ConductEventListener implements ICraftingHandler {
 				
 				if (iRecipe.getRecipeOutput() != null && iRecipe.getRecipeOutput().isItemEqual(checking))
 				{
-					System.out.println("I found a recipe for your current item. It is " + iRecipe);
+					//System.out.println("I found a recipe for your current item. It is " + iRecipe);
 
 					
 					// shaped recipe checker
@@ -121,6 +129,7 @@ public class ConductEventListener implements ICraftingHandler {
 						}
 					}
 
+					
 				}
 			}
 		}
